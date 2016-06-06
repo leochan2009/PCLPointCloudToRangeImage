@@ -225,6 +225,7 @@ int vtkPLYReaderLocal::RequestData(
       vtkPoints *pts = vtkPoints::New();
       pts->SetDataTypeToFloat();
       pts->SetNumberOfPoints(numPts);
+      pts->Reset();
       
       // Setup to read the PLY elements
       vtkPLY::ply_get_property (ply, elemName, &vertProps[0]);
@@ -252,10 +253,12 @@ int vtkPLYReaderLocal::RequestData(
         vtkPLY::ply_get_property (ply, elemName, &vertProps[9]);
         vtkPLY::ply_get_property (ply, elemName, &vertProps[10]);
         RGBPoints->SetNumberOfTuples(numPts);
+        RGBPoints->Reset();
       }
       vtkCellArray* newVerts = vtkCellArray::New();
       newVerts->Allocate(newVerts->EstimateSize(1,numPts));
       newVerts->InsertNextCell(numPts);
+      newVerts->Reset();
       plyVertex vertex;
       for (int j=0; j < numPts; j++)
       {
